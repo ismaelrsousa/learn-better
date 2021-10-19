@@ -8,6 +8,7 @@ import { NativeRouter, Route, Link } from "react-router-native";
 import Register from './src/app/pages/auth/Register/Register';
 import Login from './src/app/pages/auth/Login';
 import RegisterMentor from './src/app/pages/auth/Register/RegisterMentor';
+import RegisterMentee from './src/app/pages/auth/Register/RegisterMentee';
 import InConstruction from './src/app/pages/InConstruction';
 
 const STATUSBAR_HEIGHT = Platform.OS === 'ios' ? 20 : 30;
@@ -22,6 +23,7 @@ export default function App () {
         <Route path="/coming-soon" component={ InConstruction } />
         <Route path="/login" component={ Login } />
         <Route path="/register/mentor" component={ RegisterMentor } />
+        <Route path="/register/mentee" component={ RegisterMentee } />
       </View>
     </NativeRouter>
   );

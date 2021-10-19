@@ -31,7 +31,7 @@ export default function Register () {
       password,
       gender,
       avaliation: 0,
-      type: "Mentor"
+      type: "Mentorado"
     }
 
     fetch("https://blooming-waters-90387.herokuapp.com/users",{
@@ -68,7 +68,7 @@ export default function Register () {
       <View style={styles.top}>
         <Image source={ LogoH } style={styles.logo} />
 
-        <Text style={styles.title_black}>Quero ser <Text style={styles.title_blue}>Mentor</Text></Text>
+        <Text style={styles.title_black}>Quero ser <Text style={styles.title_blue}>Mentorado</Text></Text>
       </View>
 
       <ScrollView style={styles.bottom}>
@@ -144,7 +144,7 @@ const styles = StyleSheet.create({
     marginBottom: 30,
   },
   title_blue: {
-    color: "#2C66BC",
+    color: "#3EBFC7",
     fontSize: 30,
     fontWeight: "900",
   },

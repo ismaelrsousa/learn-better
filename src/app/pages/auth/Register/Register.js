@@ -22,7 +22,7 @@ export default function Register () {
           <Text style={styles.button_text}>Quero ser Mentor</Text>
         </Link>
 
-        <Link to="/register/mentor" style={styles.button_green} component={TouchableOpacity} activeOpacity={0.5}>
+        <Link to="/register/mentee" style={styles.button_green} component={TouchableOpacity} activeOpacity={0.5}>
           <Text style={styles.button_text}>Quero ser Mentorado</Text>
         </Link>
 
