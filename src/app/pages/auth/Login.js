@@ -1,144 +1,190 @@
 import React, { useState } from 'react';
 
-//? STRUCTURE
-import { Image, StyleSheet, Text, View, TouchableOpacity, TextInput, Button } from 'react-native';
-import { Link, Redirect } from 'react-router-native';
+import { Image, StyleSheet, Text, View, TouchableOpacity, ScrollView, TextInput } from 'react-native';
 
-//? ASSETS
-import LogoH from "../../../../assets/logo-horizontal.png";
+import Logo from '../../../../assets/logo.png';
+import Facebook from '../../../../assets/icons/facebook.png';
 
-export default function Register () {
+import ArrowLeft from '../../../../assets/arrow-left.png';
+
+const STATUSBAR_HEIGHT = Platform.OS === 'ios' ? 20 : 30;
+
+export default function Login ({ navigation }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [logged, setLogged] = useState(0);
-  const [loading, setLoading] = useState(0);
 
-  function Login() {
-    let valid = false;
+  let login = () => {
     
-    if(email == "" || password == "") return alert("Preencha com seu email e senha")
-    
-    setLoading(1);
 
-    fetch("https://blooming-waters-90387.herokuapp.com/users")
+    fetch("https://learnbetterapi.herokuapp.com/users")
     .then((result) => result.json())
     .then((result) => {
-      result.forEach(user => {
-        if(email == user.nm_email && password == user.cd_senha) {
-          console.log(user);
+      let valid = false;
+
+      result.forEach(element => {
+        if(element.nm_email == email && element.cd_senha == password)
           valid = true;
-        }
-
-        if(valid)
-          setLogged(1);
-        else
-          alert("Email ou senha incorretos");
-
-        setLoading(0);
       });
+
+      if(valid)
+        navigation.navigate("AppHome");
+      else
+        alert("Email ou senha incorretos")
+    }).catch((err) => {
+      alert(err);
     });
   }
 
-  if(logged == 1) {
-    return (
-      <Redirect to="/coming-soon" />
-    )
-  }
   return (
-    <View style={styles.container}>
-      <View style={styles.top}>
-        <Image source={ LogoH } style={styles.logo} />
-
-        <Text style={styles.desc}>Digite os dados de login para continuar</Text>
-      </View>
-
-      <View style={styles.bottom}>
-        <View style={styles.input_container}>
-          <Text style={styles.input_label}>Email:</Text>
-          <TextInput
-            style={styles.input}
-            keyboardType="email-address"
-            onChangeText={setEmail}
-          />
-        </View>
-
-        <View style={styles.input_container}>
-          <Text style={styles.input_label}>Senha:</Text>
-          <TextInput secureTextEntry={true} style={styles.input} onChangeText={setPassword} />
-        </View>
-
-        <TouchableOpacity style={styles.button} onPress={Login} activeOpacity={0.7}>
-          { loading? <Text style={styles.button_text}>Carregando...</Text>: <Text style={styles.button_text}>Entrar</Text> }
+    <View style={style.container}>
+      <View style={style.top}>
+        <TouchableOpacity style={style.back} onPress={() => {navigation.goBack()}}>
+          <Image source={ArrowLeft} style={style.back_icon} />
         </TouchableOpacity>
 
-        <Link to="/login" component={TouchableOpacity} activeOpacity={0.5}>
-          <Text style={styles.forgot}>Esqueci minha senha</Text>
-        </Link>
+        <Image source={Logo} style={style.logo} />
+      </View>
+
+      <View style={style.input_container}>
+        <Text style={style.label}>Email</Text>
+        <TextInput onChangeText={(value) => {setEmail(value)}} keyboardType="email-address" style={style.input} />
+      </View>
+
+      <View style={style.input_container}>
+        <Text style={style.label}>Senha</Text>
+        <TextInput secureTextEntry={true} onChangeText={(value) => {setPassword(value)}} style={style.input} />
+      </View>
+
+      <TouchableOpacity style={style.login} onPress={login}>
+        <Text style={style.login_text}>Entrar</Text>
+      </TouchableOpacity>
+
+      <View style={style.access_line}>
+        <TouchableOpacity style={style.access}>
+          <Text style={style.access_text}>Acessar</Text>
+          <Image source={Facebook} style={style.access_icon} />
+        </TouchableOpacity>
+      </View>
+
+      <View style={style.links_row}>
+        <TouchableOpacity style={style.link}>
+          <Text style={style.link_text}>Esqueci minha senha</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={style.link} onPress={() => { navigation.navigate("Home") }}>
+          <Text style={style.link_text}>Não tenho uma conta</Text>
+        </TouchableOpacity>
       </View>
     </View>
-  );
+  )
 }
 
-const styles = StyleSheet.create({
+const style = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 30,
-    justifyContent: 'space-between'
+    paddingHorizontal: 30,
+    marginTop: STATUSBAR_HEIGHT,
+    paddingBottom: 20,
+    justifyContent: 'center'
   },
+
   top: {
+    position: 'absolute',
+    top: 0,
     width: '100%',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginBottom: 100
+    left: 30
   },
+
+  back: {
+    position: 'absolute',
+    zIndex: 10
+  },
+
+  back_icon: {
+    width: 30,
+    height: 30,
+    resizeMode: 'contain'
+  },
+
   logo: {
-    width: '60%',
+    width: '100%',
+    height: 80,
     resizeMode: 'contain',
-    marginBottom: 30,
-  },
-  desc: {
-    color: "#000",
-    fontSize: 16,
+    marginBottom: 50
   },
 
-  bottom: {
-    width: '100%',
-    marginBottom: 'auto',
-    marginTop: 'auto',
-  },
-  input: {
-    borderWidth: 1,
-    borderColor: "#CCC",
-    padding: 14,
-    borderRadius: 4
-  },
-  input_label: {
-    marginBottom: 5,
-    fontSize: 14,
-  },
-  input_container: {
-    marginBottom: 30
-  },
-
-  button: {
-    backgroundColor: "#2C66BC",
-    paddingVertical: 20,
-    paddingHorizontal: 40,
-    borderRadius: 500,
-    width: '100%',
-    alignItems: 'center',
-    marginBottom: 10,
-  },
-
-  button_text: {
-    color: "#FFF",
-    fontWeight: "900",
+  label: {
     fontSize: 16
   },
 
-  forgot: {
-    color: "#2C66BC",
+  input_container: {
+    marginBottom: 40
+  },
+
+  input: {
+    padding: 10,
+    paddingHorizontal: 20,
+    borderBottomWidth: 1,
+    borderBottomColor: "#CCC"
+  },
+
+  login: {
+    padding: 20,
+    backgroundColor: '#2C66BC',
+    borderRadius: 500,
+    marginBottom: 20,
+  },
+
+  login_text: {
+    textAlign: 'center',
+    color: '#FFF',
     fontSize: 16,
-    marginLeft: 'auto'
+  },
+
+  access_line: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+
+  access: {
+    padding: 20,
+    backgroundColor: '#1977F3',
+    width: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'row',
+    borderRadius: 500,
+  },
+
+  access_text: {
+    color: "#FFF",
+    fontSize: 15
+  },
+
+  access_icon: {
+    width: 24,
+    height: 24,
+    resizeMode: 'contain',
+    marginLeft: 10
+  },
+
+  button_blue: {
+    padding: 20,
+    backgroundColor: '#2C66BC',
+    borderRadius: 200,
+    marginHorizontal: 20,
+    marginBottom: 20,
+  },
+
+  links_row: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: 15,
+    marginHorizontal: 20
+  },
+
+
+  link_text: {
+    color: "#2C66BC"
   }
-});
+})
