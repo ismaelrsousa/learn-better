@@ -14,6 +14,7 @@ import Login from './src/app/pages/auth/Login';
 
 import CreateAccountMentor from './src/app/pages/auth/CreateAccount/Mentor';
 import CreateAccountMentee from './src/app/pages/auth/CreateAccount/Mentee';
+import CreateAccountSuccess from './src/app/pages/auth/CreateAccount/Success';
 
 const STATUSBAR_HEIGHT = Platform.OS === 'ios' ? 20 : 30;
 
@@ -22,7 +23,7 @@ const Stack = createNativeStackNavigator();
 export default function App () {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home">
+      <Stack.Navigator initialRouteName="CreateAccountSuccess">
         <Stack.Screen
           name="Start-1"
           component={Start1}
@@ -64,6 +65,12 @@ export default function App () {
         <Stack.Screen
           name="CreateAccountMentee"
           component={CreateAccountMentee}
+          options={{ headerShown: false }}
+          />
+
+        <Stack.Screen
+          name="CreateAccountSuccess"
+          component={CreateAccountSuccess}
           options={{ headerShown: false }}
           />
 

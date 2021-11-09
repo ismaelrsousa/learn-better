@@ -49,8 +49,7 @@ export default function Mentor ({ navigation }) {
     })
     .then((result) => {
       if(result.ok) {
-        alert("Conta criada com sucesso!");
-        navigation.navigate("AppHome")
+        navigation.navigate("CreateAccountSuccess")
       } else {
         setLoading(0);
         return result.text().then(text => {throw new Error(text)})
