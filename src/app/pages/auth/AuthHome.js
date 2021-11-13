@@ -6,7 +6,7 @@ import Logo from '../../../../assets/logo.png';
 
 const STATUSBAR_HEIGHT = Platform.OS === 'ios' ? 20 : 30;
 
-export default function Home ({ navigation }) {
+export default function AuthHome ({ navigation }) {
   return (
     <View style={style.container}>
       <View style={style.top}>
