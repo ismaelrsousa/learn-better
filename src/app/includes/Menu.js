@@ -9,14 +9,14 @@ import Plus from '../../../assets/icons/plus.png';
 import Bell from '../../../assets/icons/bell.png';
 import Profile from '../../../assets/icons/profile.png';
 
-export default function Menu() {
+export default function Menu(props) {
   return (
     <View style={style.contain}>
       <TouchableOpacity style={style.icon_container}>
         <Image source={Home} style={style.icon} />
       </TouchableOpacity>
 
-      <TouchableOpacity style={style.icon_container}>
+      <TouchableOpacity style={style.icon_container} onPress={() => {props.navigation.navigate("Mensagens")}}>
         <Image source={Chat} style={style.icon} />
         <View style={style.notify}></View>
       </TouchableOpacity>
@@ -43,7 +43,7 @@ const style = StyleSheet.create({
     padding: 20,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'center'
+    alignItems: 'center',
   },
 
   plus_button: {
@@ -53,10 +53,6 @@ const style = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 500
-  },
-
-  icon_container: {
-
   },
 
   icon: {

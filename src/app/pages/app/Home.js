@@ -8,7 +8,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 
 import Menu from '../../includes/Menu';
 
-export default function Home() {
+export default function Home({ navigation }) {
   return (
     <View style={{height: '100%'}}>
       <StatusBar backgroundColor="#2C66BC"></StatusBar>
@@ -206,7 +206,7 @@ export default function Home() {
         </ScrollView>
       </ScrollView>
 
-      <Menu />
+      <Menu navigation={navigation} />
     </View>
   );
 }
