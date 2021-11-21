@@ -163,16 +163,16 @@ const style = StyleSheet.create({
   container: {
     flex: 1,
     paddingHorizontal: 30,
-    marginTop: STATUSBAR_HEIGHT,
-    paddingTop: 100,
+    paddingTop: 150,
     paddingBottom: 20,
+    backgroundColor: "#FFF"
   },
 
   top: {
     position: 'absolute',
-    top: 0,
+    top: 30,
     width: '100%',
-    left: 30
+    left: 30,
   },
 
   logo: {

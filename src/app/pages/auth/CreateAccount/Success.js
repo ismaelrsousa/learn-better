@@ -1,14 +1,8 @@
 import React, { useState } from 'react';
 
-import { Image, StyleSheet, Text, View, TouchableOpacity, ScrollView } from 'react-native';
+import { Image, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 
-import Arrow from '../../../../../assets/arrow.png';
-
-import Logo from '../../../../../assets/logo.png';
 import SuccessImage from '../../../../../assets/start/success.png';
-import Mentor from '../../../../../assets/start/mentor.png';
-
-const STATUSBAR_HEIGHT = Platform.OS === 'ios' ? 20 : 30;
 
 export default function Success ({ navigation }) {
 
@@ -34,9 +28,9 @@ const style = StyleSheet.create({
   container: {
     flex: 1,
     paddingHorizontal: 30,
-    marginTop: STATUSBAR_HEIGHT,
     paddingBottom: 20,
-    justifyContent: 'center'
+    justifyContent: 'center',
+    backgroundColor: "#FFF"
   },
 
   image: {

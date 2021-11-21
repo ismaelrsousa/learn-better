@@ -7,8 +7,6 @@ import Facebook from '../../../../assets/icons/facebook.png';
 
 import ArrowLeft from '../../../../assets/arrow-left.png';
 
-const STATUSBAR_HEIGHT = Platform.OS === 'ios' ? 20 : 30;
-
 export default function Login ({ navigation }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -59,12 +57,12 @@ export default function Login ({ navigation }) {
         <Text style={style.login_text}>Entrar</Text>
       </TouchableOpacity>
 
-      <View style={style.access_line}>
+      {/* <View style={style.access_line}>
         <TouchableOpacity style={style.access}>
           <Text style={style.access_text}>Acessar</Text>
           <Image source={Facebook} style={style.access_icon} />
         </TouchableOpacity>
-      </View>
+      </View> */}
 
       <View style={style.links_row}>
         <TouchableOpacity style={style.link}>
@@ -72,7 +70,7 @@ export default function Login ({ navigation }) {
         </TouchableOpacity>
 
         <TouchableOpacity style={style.link} onPress={() => { navigation.navigate("Home") }}>
-          <Text style={style.link_text}>Não tenho uma conta</Text>
+          <Text style={style.link_text}>Criar uma conta</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -83,14 +81,14 @@ const style = StyleSheet.create({
   container: {
     flex: 1,
     paddingHorizontal: 30,
-    marginTop: STATUSBAR_HEIGHT,
     paddingBottom: 20,
-    justifyContent: 'center'
+    justifyContent: 'center',
+    backgroundColor: "#FFF"
   },
 
   top: {
     position: 'absolute',
-    top: 0,
+    top: 30,
     width: '100%',
     left: 30
   },

@@ -4,8 +4,6 @@ import { Image, StyleSheet, Text, View, TouchableOpacity, ScrollView } from 'rea
 
 import Logo from '../../../../assets/logo.png';
 
-const STATUSBAR_HEIGHT = Platform.OS === 'ios' ? 20 : 30;
-
 export default function AuthHome ({ navigation }) {
   return (
     <View style={style.container}>
@@ -38,14 +36,14 @@ const style = StyleSheet.create({
   container: {
     flex: 1,
     paddingHorizontal: 30,
-    marginTop: STATUSBAR_HEIGHT,
     paddingBottom: 20,
-    justifyContent: 'center'
+    justifyContent: 'center',
+    backgroundColor: "#FFF"
   },
 
   top: {
     position: 'absolute',
-    top: 0,
+    top: 30,
     width: '100%',
     left: 30
   },
