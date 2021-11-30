@@ -27,8 +27,8 @@ const style = StyleSheet.create({
   },
 
   star: {
-    width: 30,
-    height: 30,
+    width: 20,
+    height: 20,
     resizeMode: 'contain',
     marginHorizontal: 5
   }

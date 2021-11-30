@@ -1,43 +1,60 @@
 import React, { useState } from 'react';
 
-import { Image, StyleSheet, Text, View, TouchableOpacity, ScrollView, TextInput } from 'react-native';
+import Loading from '../../includes/Loading';
+
+import { Image, StyleSheet, Text, View, TouchableOpacity, ScrollView, TextInput, StatusBar, Keyboard } from 'react-native';
 
 import Logo from '../../../../assets/logo.png';
-import Facebook from '../../../../assets/icons/facebook.png';
 
 import ArrowLeft from '../../../../assets/arrow-left.png';
 
 export default function Login ({ navigation }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
 
   let login = () => {
+    Keyboard.dismiss()
+    
+    setLoading(true)
 
     if(email.length >= 3 && password.length >= 3) {
       fetch("https://learnbetterapi.herokuapp.com/users")
       .then((result) => result.json())
       .then((result) => {
         let valid = false;
+        let user;
 
         result.forEach(element => {
-          if(element.nm_email == email && element.cd_senha == password)
+          if(element.nm_email == email && element.cd_senha == password) {
+            user = element;
             valid = true;
+          }
         });
 
-        if(valid)
+        setLoading(false);
+
+        if(valid) {
+          global.user.id = user.cd_usuario;
           navigation.navigate("AppHome");
+        }
         else
           alert("Email ou senha incorretos")
       }).catch((err) => {
         alert(err);
       });
     } else {
+      setLoading(false)
       alert("Preencha todos os campos");
     }
   }
 
   return (
     <View style={style.container}>
+      <StatusBar backgroundColor="#2C66BC"></StatusBar>
+
+      <Loading visible={loading} />
+
       <View style={style.top}>
         <TouchableOpacity style={style.back} onPress={() => {navigation.goBack()}}>
           <Image source={ArrowLeft} style={style.back_icon} />
@@ -46,35 +63,37 @@ export default function Login ({ navigation }) {
         <Image source={Logo} style={style.logo} />
       </View>
 
-      <View style={style.input_container}>
-        <Text style={style.label}>Email</Text>
-        <TextInput onChangeText={(value) => {setEmail(value)}} keyboardType="email-address" style={style.input} />
-      </View>
+      <View style={style.form}>
+        <View style={style.input_container}>
+          <Text style={style.label}>Email</Text>
+          <TextInput onChangeText={(value) => {setEmail(value)}} keyboardType="email-address" style={style.input} />
+        </View>
 
-      <View style={style.input_container}>
-        <Text style={style.label}>Senha</Text>
-        <TextInput secureTextEntry={true} onChangeText={(value) => {setPassword(value)}} style={style.input} />
-      </View>
+        <View style={style.input_container}>
+          <Text style={style.label}>Senha</Text>
+          <TextInput secureTextEntry={true} onChangeText={(value) => {setPassword(value)}} style={style.input} />
+        </View>
 
-      <TouchableOpacity style={style.login} onPress={login}>
-        <Text style={style.login_text}>Entrar</Text>
-      </TouchableOpacity>
-
-      {/* <View style={style.access_line}>
-        <TouchableOpacity style={style.access}>
-          <Text style={style.access_text}>Acessar</Text>
-          <Image source={Facebook} style={style.access_icon} />
-        </TouchableOpacity>
-      </View> */}
-
-      <View style={style.links_row}>
-        <TouchableOpacity style={style.link}>
-          <Text style={style.link_text}>Esqueci minha senha</Text>
+        <TouchableOpacity style={style.login} onPress={login}>
+          <Text style={style.login_text}>Entrar</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={style.link} onPress={() => { navigation.navigate("Home") }}>
-          <Text style={style.link_text}>Criar uma conta</Text>
-        </TouchableOpacity>
+        {/* <View style={style.access_line}>
+          <TouchableOpacity style={style.access}>
+            <Text style={style.access_text}>Acessar</Text>
+            <Image source={Facebook} style={style.access_icon} />
+          </TouchableOpacity>
+        </View> */}
+
+        <View style={style.links_row}>
+          <TouchableOpacity style={style.link}>
+            <Text style={style.link_text}>Esqueci minha senha</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity style={style.link} onPress={() => { navigation.navigate("Home") }}>
+            <Text style={style.link_text}>Criar uma conta</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   )
@@ -84,34 +103,37 @@ const style = StyleSheet.create({
   container: {
     flex: 1,
     paddingHorizontal: 30,
-    paddingBottom: 20,
+    paddingVertical: 20,
     justifyContent: 'center',
     backgroundColor: "#FFF"
   },
 
   top: {
-    position: 'absolute',
-    top: 30,
+    marginBottom: 'auto',
     width: '100%',
-    left: 30
+    flexDirection: 'row',
+    alignItems: 'center'
   },
 
   back: {
-    position: 'absolute',
     zIndex: 10
   },
 
   back_icon: {
-    width: 30,
-    height: 30,
+    width: 24,
+    height: 24,
     resizeMode: 'contain'
   },
 
   logo: {
     width: '100%',
-    height: 80,
+    height: 70,
+    marginLeft: -24,
     resizeMode: 'contain',
-    marginBottom: 50
+  },
+
+  form: {
+    marginBottom: 'auto',
   },
 
   label: {

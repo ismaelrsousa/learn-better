@@ -1,11 +1,30 @@
 import React from 'react';
-import { StatusBar, Text, View, StyleSheet, ScrollView, Image } from 'react-native';
+import { StatusBar, Text, View, StyleSheet, ScrollView, Image, Alert } from 'react-native';
 
 import Profile from '../../../../assets/profile.png';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 import Menu from '../../includes/Menu';
 import Stars from '../../includes/Stars';
+
+function exit(navigation) {
+  return Alert.alert(
+    "Tem certeza?",
+    "Tem certeza que deseja se desconectar?",
+    [
+      {
+        text: "Sim",
+        onPress: () => {
+          navigation.navigate("Home");
+          alert("Você foi desconectado");
+        }
+      },
+      {
+        text: "Não",
+      },
+    ]
+  )
+}
 
 export default function Home({ navigation }) {
   return (
@@ -52,6 +71,10 @@ export default function Home({ navigation }) {
               <Text style={style.prop_value}>6 mesês lecionando na Fatec PG;</Text>
             </View>
           </View>
+
+          <TouchableOpacity style={style.logout} onPress={() => exit(navigation)}>
+            <Text style={style.logout_text}>Desconectar</Text>
+          </TouchableOpacity>
         </ScrollView>
       </View>
 
@@ -73,8 +96,8 @@ const style = StyleSheet.create({
   },
   
   profile_pic_container: {
-    width: 150,
-    height: 150,
+    width: 120,
+    height: 120,
     borderRadius: 5000,
     overflow: 'hidden',
     borderWidth: 10,
@@ -143,4 +166,9 @@ const style = StyleSheet.create({
     letterSpacing: 1,
     textAlign: 'center'
   },
+
+  logout_text: {
+    color: '#E54C4C',
+    fontSize: 15,
+  }
 })

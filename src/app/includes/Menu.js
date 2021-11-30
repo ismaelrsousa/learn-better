@@ -41,23 +41,33 @@ const style = StyleSheet.create({
   contain: {
     backgroundColor: '#323444',
     padding: 20,
+    paddingVertical: 10,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
   },
 
   plus_button: {
-    width: 60,
-    height: 60,
+    width: 50,
+    height: 50,
     backgroundColor: '#2CB3BC',
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 500
   },
 
+  plus_icon: {
+    width: 20,
+    height: 20
+  },
+
+  icon_container: {
+    padding: 10,
+  },
+
   icon: {
-    width: 30,
-    height: 30
+    width: 24,
+    height: 24
   },
 
   notify: {
@@ -66,7 +76,7 @@ const style = StyleSheet.create({
     backgroundColor: "#2CB3BC",
     borderRadius: 500,
     position: 'absolute',
-    right: 0,
-    bottom: 0
+    right: 10,
+    bottom: 10
   }
 })

@@ -66,8 +66,8 @@ const style = StyleSheet.create({
 
   desc : {
     textAlign: 'center',
-    fontSize: 16,
-    lineHeight: 22
+    fontSize: 14,
+    lineHeight: 20
   },
 
   list_container: {
@@ -83,17 +83,19 @@ const style = StyleSheet.create({
   },
 
   item: {
-    margin: 5,
+    margin: 2,
+    marginBottom: 10,
     padding: 5,
     paddingHorizontal: 20,
-    borderWidth: 2,
+    borderWidth: 1,
     borderColor: '#2C66BC',
     borderRadius: 50,
   },
 
   item_active: {
-    margin: 5,
-    padding: 7,
+    margin: 2,
+    marginBottom: 10,
+    padding: 6,
     paddingHorizontal: 22,
     borderRadius: 50,
     backgroundColor: '#2C66BC'
@@ -121,7 +123,7 @@ const style = StyleSheet.create({
   button_text: {
     color: "#FFF",
     textAlign: 'center',
-    fontSize: 20,
+    fontSize: 16,
     fontWeight: 'bold'
   }
 })

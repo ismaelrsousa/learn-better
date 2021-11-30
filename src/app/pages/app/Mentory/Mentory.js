@@ -41,11 +41,6 @@ export default function Mentory({ navigation }) {
                 <Text style={style.list_item}>Mestre em Literatura.</Text>
               </View>
             </View>
-
-            <View style={style.prop}>
-              <Text style={style.prop_desc}>Categorias</Text>
-              <Text style={style.prop_value}>Redação, Literatura, Texto, Escrita, Português, Alfabetização</Text>
-            </View>
           </View>
 
           <View style={style.buttons_row}>
@@ -75,12 +70,12 @@ const style = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#FFF",
-    padding: 20,
+    padding: 10,
     paddingHorizontal: 30
   },
   
   profile: {
-    padding: 30,
+    padding: 20,
     backgroundColor: '#323444',
     alignItems: 'center',
     marginTop: 60,
@@ -88,12 +83,12 @@ const style = StyleSheet.create({
   },
   
   profile_pic_container: {
-    width: 150,
-    height: 150,
+    width: 120,
+    height: 120,
     borderRadius: 5000,
     overflow: 'hidden',
-    marginTop: -100,
-    borderWidth: 10,
+    marginTop: -60,
+    borderWidth: 8,
     borderColor: '#323444',
   },
 
@@ -152,8 +147,8 @@ const style = StyleSheet.create({
   },
 
   button_colored: {
-    paddingVertical: 16,
-    paddingHorizontal: 20,
+    paddingVertical: 14,
+    paddingHorizontal: 24,
     backgroundColor: "#2BB9C3",
     borderRadius: 10,
   },
@@ -161,9 +156,8 @@ const style = StyleSheet.create({
   button_colored_text: {
     color: "#FFF",
     textTransform: 'uppercase',
-    fontSize: 16,
+    fontSize: 13,
     fontWeight: 'bold',
-    letterSpacing: 1,
     textAlign: 'center'
   },
 
@@ -178,15 +172,15 @@ const style = StyleSheet.create({
   button_text: {
     color: "#FFF",
     textTransform: 'uppercase',
-    fontSize: 16,
+    fontSize: 13,
     fontWeight: 'bold',
     letterSpacing: 1,
     textAlign: 'center'
   },
 
   next_icon: {
-    width: 14,
-    height: 14,
+    width: 12,
+    height: 12,
     resizeMode: 'contain',
     marginLeft: 10
   },

@@ -25,7 +25,7 @@ const style = StyleSheet.create({
   header:{
     flexDirection: 'row',
     alignItems: 'center',
-    paddingBottom: 10
+    paddingVertical: 15
   },
 
   pic_container: {
@@ -34,8 +34,8 @@ const style = StyleSheet.create({
   },
 
   pic_cut: {
-    width: 50,
-    height: 50,
+    width: 40,
+    height: 40,
     overflow: 'hidden',
     borderRadius: 500,
   },
@@ -47,13 +47,13 @@ const style = StyleSheet.create({
   },
 
   pic_status: {
-    width: 14,
-    height: 14,
+    width: 10,
+    height: 10,
     borderRadius: 500,
     backgroundColor: '#2CB3BC',
     position: 'absolute',
-    right: 2,
-    bottom: 2
+    right: 0,
+    bottom: 0
   },
 
   meta: {
@@ -61,14 +61,13 @@ const style = StyleSheet.create({
   },
 
   title: {
-    fontSize: 22,
+    fontSize: 14,
     fontWeight: "700",
     color: '#FFF',
-    letterSpacing: 1
   },
 
   desc: {
-    fontSize: 16,
+    fontSize: 12,
     color: '#FFF',
   }
 })

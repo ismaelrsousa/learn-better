@@ -42,14 +42,18 @@ export default function Details({ navigation }) {
               </View>
             </View>
 
-            <View style={style.prop}>
+            <View style={style.prop_big}>
               <Text style={style.prop_desc}>Categorias</Text>
               <Text style={style.prop_value}>Redação, Literatura, Texto, Escrita, Português, Alfabetização</Text>
             </View>
 
-            <View style={style.prop}>
+            <View style={style.prop_big}>
               <Text style={style.prop_desc}>Experiência</Text>
-              <Text style={style.prop_value}>6 mesês lecionando na Fatec PG;</Text>
+              <View style={style.list}>
+                <Text style={style.list_item}>6 meses lecionando na FATECPG;</Text>
+                <Text style={style.list_item}>1 ano lecionando na UNISANTA;</Text>
+                <Text style={style.list_item}>10 meses lecionando na UNISANTOS;</Text>
+              </View>
             </View>
           </View>
 
@@ -58,8 +62,6 @@ export default function Details({ navigation }) {
           </TouchableOpacity>
         </ScrollView>
       </View>
-
-      
 
       {/* <Menu navigation={navigation} /> */}
     </View>
@@ -70,8 +72,10 @@ const style = StyleSheet.create({
   profile_content: {
     flex: 1,
     backgroundColor: "#323444",
+  },
+
+  profile: {
     padding: 20,
-    paddingHorizontal: 30,
   },
 
   top: {
@@ -80,8 +84,8 @@ const style = StyleSheet.create({
   },
   
   profile_pic_container: {
-    width: 150,
-    height: 150,
+    width: 120,
+    height: 120,
     borderRadius: 5000,
     overflow: 'hidden',
     borderWidth: 10,
@@ -115,13 +119,19 @@ const style = StyleSheet.create({
 
   prop: {
     width: '46%',
-    marginBottom: 20
+    marginBottom: 40
+  },
+
+  prop_big: {
+    width: '100%',
+    marginBottom: 40
   },
 
   prop_desc: {
     color: '#FFF',
     fontWeight: 'bold',
-    fontSize: 18
+    fontSize: 18,
+    lineHeight: 24
   },
 
   prop_value: {
@@ -139,7 +149,8 @@ const style = StyleSheet.create({
     padding: 20,
     backgroundColor: "#2BB9C3",
     borderRadius: 10,
-    marginTop: 50
+    marginTop: 50,
+    marginBottom: 50
   },
   
   button_text: {

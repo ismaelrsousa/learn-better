@@ -9,7 +9,7 @@ import Logo from '../../../../../assets/logo.png';
 import Arrow from '../../../../../assets/arrow-white.png';
 import ArrowLeft from '../../../../../assets/arrow-left.png';
 
-const STATUSBAR_HEIGHT = Platform.OS === 'ios' ? 20 : 30;
+import Loading from '../../../includes/Loading';
 
 export default function Mentor ({ navigation }) {
   const [nome, setNome] = useState("");
@@ -27,6 +27,8 @@ export default function Mentor ({ navigation }) {
   const [loading, setLoading] = useState(0);
 
   let create = () => {
+    setLoading(true);
+
     let user = {
       name: nome,
       birthdate: `${ano}-${mes}-${dia}`,
@@ -48,6 +50,8 @@ export default function Mentor ({ navigation }) {
       body: JSON.stringify(user)
     })
     .then((result) => {
+      setLoading(false);
+
       if(result.ok) {
         navigation.navigate("CreateAccountSuccess")
       } else {
@@ -57,6 +61,7 @@ export default function Mentor ({ navigation }) {
 
       setLoading(0);
     }).catch((err) => {
+      setLoading(false);
       alert(err);
     });
   }
@@ -82,78 +87,83 @@ export default function Mentor ({ navigation }) {
   }
 
   return (
-    <View style={style.container}>
-      <View style={style.top}>
-        <TouchableOpacity style={style.back} onPress={() => {navigation.goBack()}}>
-          <Image source={ArrowLeft} style={style.back_icon} />
-        </TouchableOpacity>
+    <View style={{flex: 1}}>
+      <Loading visible={loading} />
 
-        <Image source={Logo} style={style.logo} />
-      </View>
+      <ScrollView style={style.container}>
+        <View style={style.top}>
+          <TouchableOpacity style={style.back} onPress={() => {navigation.goBack()}}>
+            <Image source={ArrowLeft} style={style.back_icon} />
+          </TouchableOpacity>
 
-      <Text style={style.title}>Quero ser <Text style={style.title_blue}>Mentorado</Text></Text>
-      <Text style={style.desc}>Precisamos de alguns dados para continuar</Text>
-
-      <ScrollView style={style.scroll}>
-        <View style={style.input_container}>
-          <Text style={style.label}>Nome</Text>
-          <TextInput onChangeText={(value) => {setNome(value)}} style={style.input} />
+          <Image source={Logo} style={style.logo} />
         </View>
 
-        <View style={style.input_container}>
-          <Text style={style.label}>Email</Text>
-          <TextInput onChangeText={(value) => {setEmail(value)}} style={style.input} />
-        </View>
+        <View style={style.form}>
 
-        <View style={style.input_container}>
-          <Text style={style.label}>Celular</Text>
-          <TextInputMask type={'cel-phone'} value={celular} onChangeText={(value) => {setCelular(value)}} keyboardType="numeric" style={style.input} />
-        </View>
+          <Text style={style.title}>Quero ser <Text style={style.title_blue}>Mentorado</Text></Text>
+          <Text style={style.desc}>Precisamos de alguns dados para continuar</Text>
 
-        <View style={style.input_container}>
-          <Text style={style.label}>Sexo</Text>
-          <View style={style.input_no_padding}>
-            <Picker selectedValue={genero} onValueChange={(value) => setGenero(value)}>
-              <Picker.Item label="Selecione" value="" />
-              <Picker.Item label="Masculino" value="m" />
-              <Picker.Item label="Feminino" value="f" />
-              <Picker.Item label="Prefiro não informar" value="n/a" />
-            </Picker>
+          <View style={style.input_container}>
+            <Text style={style.label}>Nome</Text>
+            <TextInput onChangeText={(value) => {setNome(value)}} style={style.input} />
           </View>
-        </View>
 
-        <View style={style.input_container}>
-          <Text style={style.label}>CPF</Text>
-          <TextInputMask type={'cpf'} value={cpf} onChangeText={(value) => {setCpf(value)}} keyboardType="numeric" style={style.input} />
-        </View>
+          <View style={style.input_container}>
+            <Text style={style.label}>Email</Text>
+            <TextInput onChangeText={(value) => {setEmail(value)}} style={style.input} />
+          </View>
 
-        <View style={style.input_container}>
-          <Text style={style.label}>Data de Nascimento</Text>
+          <View style={style.input_container}>
+            <Text style={style.label}>Celular</Text>
+            <TextInputMask type={'cel-phone'} value={celular} onChangeText={(value) => {setCelular(value)}} keyboardType="numeric" style={style.input} />
+          </View>
 
-          <View style={style.date_line}>
+          <View style={style.input_container}>
+            <Text style={style.label}>Sexo</Text>
             <View style={style.input_no_padding}>
-              <Picker selectedValue={dia} onValueChange={(value) => setDia(value)}>{dias}</Picker>
-            </View>
-
-            <View style={style.input_no_padding}>
-              <Picker selectedValue={mes} onValueChange={(value) => setMes(value)}>{meses}</Picker>
-            </View>
-
-            <View style={style.input_no_padding}>
-              <Picker selectedValue={ano} onValueChange={(value) => setAno(value)}>{anos}</Picker>
+              <Picker selectedValue={genero} onValueChange={(value) => setGenero(value)}>
+                <Picker.Item label="Selecione" value="" />
+                <Picker.Item label="Masculino" value="m" />
+                <Picker.Item label="Feminino" value="f" />
+                <Picker.Item label="Prefiro não informar" value="n/a" />
+              </Picker>
             </View>
           </View>
-        </View>
 
-        <View style={style.input_container}>
-          <Text style={style.label}>Senha</Text>
-          <TextInput secureTextEntry={true} onChangeText={(value) => {setSenha(value)}} style={style.input} />
-        </View>
+          <View style={style.input_container}>
+            <Text style={style.label}>CPF</Text>
+            <TextInputMask type={'cpf'} value={cpf} onChangeText={(value) => {setCpf(value)}} keyboardType="numeric" style={style.input} />
+          </View>
 
-        <TouchableOpacity style={style.button} onPress={create}>
-          { loading? <Text style={style.button_text}>Carregando...</Text>: <Text style={style.button_text}>Criar conta</Text> }
-          <Image source={Arrow} style={style.button_icon} />
-        </TouchableOpacity>
+          <View style={style.input_container}>
+            <Text style={style.label}>Data de Nascimento</Text>
+
+            <View style={style.date_line}>
+              <View style={style.input_no_padding}>
+                <Picker selectedValue={dia} onValueChange={(value) => setDia(value)}>{dias}</Picker>
+              </View>
+
+              <View style={style.input_no_padding}>
+                <Picker selectedValue={mes} onValueChange={(value) => setMes(value)}>{meses}</Picker>
+              </View>
+
+              <View style={style.input_no_padding}>
+                <Picker selectedValue={ano} onValueChange={(value) => setAno(value)}>{anos}</Picker>
+              </View>
+            </View>
+          </View>
+
+          <View style={style.input_container}>
+            <Text style={style.label}>Senha</Text>
+            <TextInput secureTextEntry={true} onChangeText={(value) => {setSenha(value)}} style={style.input} />
+          </View>
+
+          <TouchableOpacity style={style.button} onPress={create}>
+            { loading? <Text style={style.button_text}>Carregando...</Text>: <Text style={style.button_text}>Criar conta</Text> }
+            <Image source={Arrow} style={style.button_icon} />
+          </TouchableOpacity>
+        </View>
       </ScrollView>
     </View>
   )
@@ -163,34 +173,38 @@ const style = StyleSheet.create({
   container: {
     flex: 1,
     paddingHorizontal: 30,
-    paddingTop: 150,
-    paddingBottom: 20,
+    paddingVertical: 20,
     backgroundColor: "#FFF"
   },
 
   top: {
-    position: 'absolute',
-    top: 30,
+    marginBottom: 'auto',
     width: '100%',
-    left: 30,
-  },
-
-  logo: {
-    width: '100%',
-    height: 80,
-    resizeMode: 'contain',
-    marginBottom: 50
+    flexDirection: 'row',
+    alignItems: 'center'
   },
 
   back: {
-    position: 'absolute',
     zIndex: 10
   },
 
   back_icon: {
-    width: 30,
-    height: 30,
+    width: 24,
+    height: 24,
     resizeMode: 'contain'
+  },
+
+  logo: {
+    width: '100%',
+    height: 70,
+    marginLeft: -24,
+    resizeMode: 'contain',
+  },
+
+  form: {
+    marginBottom: 'auto',
+    marginTop: 20,
+    flex: 1
   },
 
   label: {
@@ -235,7 +249,7 @@ const style = StyleSheet.create({
     padding: 20,
     backgroundColor: '#2C66BC',
     borderRadius: 50,
-    marginBottom: 20,
+    marginBottom: 50,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center'

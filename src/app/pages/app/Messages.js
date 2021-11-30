@@ -6,6 +6,8 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 
 import Menu from '../../includes/Menu';
 
+
+
 export default function Home({ navigation }) {
   return (
     <View style={{height: '100%'}}>
@@ -75,8 +77,7 @@ export default function Home({ navigation }) {
 
 const style = StyleSheet.create({
   container: {
-    padding: 20,
-    paddingRight: 20,
+    padding: 10,
     flex: 1,
     backgroundColor: "#FFF"
   },
@@ -92,12 +93,10 @@ const style = StyleSheet.create({
   },
 
   pic_container: {
-    width: 70,
-    height: 70,
+    width: 50,
+    height: 50,
     overflow: 'hidden',
     borderRadius: 500,
-    borderColor: "#2C66BC",
-    borderWidth: 2
   },
 
   pic: {
@@ -111,13 +110,12 @@ const style = StyleSheet.create({
   },
 
   title: {
-    fontSize: 22,
+    fontSize: 16,
     fontWeight: "700",
     color: '#323444',
-    letterSpacing: 1
   },
 
   message: {
-    fontSize: 16
+    fontSize: 14
   }
 })

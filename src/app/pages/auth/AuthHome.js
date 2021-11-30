@@ -11,7 +11,7 @@ export default function AuthHome ({ navigation }) {
         <Image source={Logo} style={style.logo} />
       </View>
 
-      <View>
+      <View style={style.form}>
         <Text style={style.desc}>Faça parte agora mesmo!</Text>
 
         <TouchableOpacity onPress={() => {navigation.navigate("CreateAccountMentor")}} style={style.button_blue}>
@@ -36,16 +36,27 @@ const style = StyleSheet.create({
   container: {
     flex: 1,
     paddingHorizontal: 30,
-    paddingBottom: 20,
+    paddingVertical: 20,
     justifyContent: 'center',
     backgroundColor: "#FFF"
   },
 
   top: {
-    position: 'absolute',
-    top: 30,
+    marginBottom: 'auto',
     width: '100%',
-    left: 30
+    flexDirection: 'row',
+    alignItems: 'center'
+  },
+
+  logo: {
+    width: '100%',
+    height: 70,
+    marginLeft: -24,
+    resizeMode: 'contain',
+  },
+
+  form: {
+    marginBottom: 'auto'
   },
   
   desc: {
