@@ -41,7 +41,7 @@ export default function Home({ navigation }) {
           </TouchableOpacity>
         </View>
 
-        <Menu navigation={navigation} />
+        {/* <Menu navigation={navigation} /> */}
       </View>
     </View>
   );

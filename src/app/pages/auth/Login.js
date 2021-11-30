@@ -12,25 +12,28 @@ export default function Login ({ navigation }) {
   const [password, setPassword] = useState("");
 
   let login = () => {
-    
 
-    fetch("https://learnbetterapi.herokuapp.com/users")
-    .then((result) => result.json())
-    .then((result) => {
-      let valid = false;
+    if(email.length >= 3 && password.length >= 3) {
+      fetch("https://learnbetterapi.herokuapp.com/users")
+      .then((result) => result.json())
+      .then((result) => {
+        let valid = false;
 
-      result.forEach(element => {
-        if(element.nm_email == email && element.cd_senha == password)
-          valid = true;
+        result.forEach(element => {
+          if(element.nm_email == email && element.cd_senha == password)
+            valid = true;
+        });
+
+        if(valid)
+          navigation.navigate("AppHome");
+        else
+          alert("Email ou senha incorretos")
+      }).catch((err) => {
+        alert(err);
       });
-
-      if(valid)
-        navigation.navigate("AppHome");
-      else
-        alert("Email ou senha incorretos")
-    }).catch((err) => {
-      alert(err);
-    });
+    } else {
+      alert("Preencha todos os campos");
+    }
   }
 
   return (

@@ -12,7 +12,7 @@ import Profile from '../../../assets/icons/profile.png';
 export default function Menu(props) {
   return (
     <View style={style.contain}>
-      <TouchableOpacity style={style.icon_container}>
+      <TouchableOpacity style={style.icon_container} onPress={() => {props.navigation.navigate("AppHome")}}>
         <Image source={Home} style={style.icon} />
       </TouchableOpacity>
 
@@ -21,7 +21,7 @@ export default function Menu(props) {
         <View style={style.notify}></View>
       </TouchableOpacity>
 
-      <TouchableOpacity style={style.plus_button}>
+      <TouchableOpacity style={style.plus_button} onPress={() => {props.navigation.navigate("MentoryCategory")}}>
         <Image source={Plus} style={style.plus_icon} />
       </TouchableOpacity>
 
@@ -30,7 +30,7 @@ export default function Menu(props) {
         <View style={style.notify}></View>
       </TouchableOpacity>
 
-      <TouchableOpacity style={style.icon_container}>
+      <TouchableOpacity style={style.icon_container} onPress={() => {props.navigation.navigate("Profile")}}>
         <Image source={Profile} style={style.icon} />
       </TouchableOpacity>
     </View>
